@@ -12,21 +12,12 @@
   </properties>
 
   <dependencies>
-    <!-- Cucumber Dependencies -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-java</artifactId>
       <version>${cucumber.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-junit</artifactId>
-      <version>${cucumber.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- JUnit 5 for better parallel execution support -->
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit-platform-engine</artifactId>
@@ -48,42 +39,30 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Selenium WebDriver -->
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
       <version>4.15.0</version>
     </dependency>
 
-    <!-- Extent Reports for HTML reporting -->
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.8.0</version>
+    </dependency>
+
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports</artifactId>
       <version>${extent.reports.version}</version>
     </dependency>
 
-    <!-- Extent Spark Reporter (recommended for Extent 5.x) -->
     <dependency>
       <groupId>com.aventstack</groupId>
       <artifactId>extentreports-cucumber7-adapter</artifactId>
       <version>1.14.0</version>
     </dependency>
 
-    <!-- Apache Commons for data handling -->
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.14.0</version>
-    </dependency>
-
-    <!-- JSON for data-driven testing -->
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.10.1</version>
-    </dependency>
-
-    <!-- Apache POI for Excel data handling -->
     <dependency>
       <groupId>org.apache.poi</groupId>
       <artifactId>poi</artifactId>
@@ -96,23 +75,21 @@
       <version>5.0.0</version>
     </dependency>
 
-    <!-- Logging -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>2.0.9</version>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.14.0</version>
     </dependency>
 
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>2.0.9</version>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <!-- Maven Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -123,39 +100,22 @@
         </configuration>
       </plugin>
 
-      <!-- Maven Surefire Plugin for Parallel Execution -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.1.2</version>
         <configuration>
-          <!-- Enable parallel execution -->
           <parallel>methods</parallel>
           <threadCount>4</threadCount>
           <perCoreThreadCount>true</perCoreThreadCount>
-          <!-- Cucumber properties for parallel execution -->
+          <useUnlimitedThreads>false</useUnlimitedThreads>
           <systemPropertyVariables>
             <cucumber.execution.parallel.enabled>true</cucumber.execution.parallel.enabled>
             <cucumber.execution.parallel.mode>concurrent</cucumber.execution.parallel.mode>
-            <cucumber.execution.parallel.worker.count>4</cucumber.execution.parallel.worker.count>
+            <cucumber.execution.parallel.config.strategy>dynamic</cucumber.execution.parallel.config.strategy>
           </systemPropertyVariables>
         </configuration>
       </plugin>
-
-      <!-- Maven Failsafe Plugin for Integration Tests -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.1.2</version>
-      </plugin>
-
-      <!-- Assembly Plugin for packaging -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.6.0</version>
-      </plugin>
     </plugins>
   </build>
-
 </project>
