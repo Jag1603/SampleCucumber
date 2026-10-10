@@ -1,23 +1,29 @@
 package Login;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 public class Hooks {
 
     private WebDriver driver;
 
-    @BeforeEach
-    public void setUp() {
+    @Before
+    public void setUp(Scenario scenario) {
         driver = DriverFactory.getDriver();
-        ExtentReportListener.createTest("Scenario: " + Thread.currentThread().getName());
+        ExtentReportListener.createTest(scenario.getName());
     }
 
-    @AfterEach
-    public void tearDown() {
+    @After
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            ExtentReportListener.logFail("Scenario failed: " + scenario.getName());
+        }
         if (driver != null) {
             driver.quit();
+            driver = null;
         }
         DriverFactory.quitDriver();
         ExtentReportListener.flush();

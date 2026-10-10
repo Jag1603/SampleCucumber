@@ -1,7 +1,6 @@
 package Login;
 
 import static io.cucumber.junit.platform.engine.Constants.EXECUTION_MODE_FEATURE_PROPERTY_NAME;
-import static io.cucumber.junit.platform.engine.Constants.EXECUTION_MODE_SCENARIO_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.PARALLEL_EXECUTION_ENABLED_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
@@ -21,6 +20,5 @@ import org.junit.platform.suite.api.Suite;
 )
 @ConfigurationParameter(key = PARALLEL_EXECUTION_ENABLED_PROPERTY_NAME, value = "true")
 @ConfigurationParameter(key = EXECUTION_MODE_FEATURE_PROPERTY_NAME, value = "concurrent")
-@ConfigurationParameter(key = EXECUTION_MODE_SCENARIO_PROPERTY_NAME, value = "concurrent")
 public class Runner {
 }

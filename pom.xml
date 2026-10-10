@@ -58,7 +58,7 @@
     </dependency>
 
     <dependency>
-      <groupId>com.aventstack</groupId>
+      <groupId>tech.grasshopper</groupId>
       <artifactId>extentreports-cucumber7-adapter</artifactId>
       <version>1.14.0</version>
     </dependency>
